@@ -1,21 +1,28 @@
-const playwright = require("playwright");
+import chai from 'chai';
+import { goto, run, stop } from './framework/lib/browser';
+const {expect} = chai;
 
 describe('Это демо сьюит', () => {
+    let page;
+    beforeEach(async () => {
+        await run();
+        page = await goto('https://planyway.com/app');
+    })
+    afterEach(async () => {
+        await stop();
+    })
     it('Это демо тест', async() => {
-        browser = await playwright.chromium.launch({
-            //тут задаются настройки браузера
-            headless: true,
-            //задержка между командами, чтобы фронтэнд успел отработать
-            slowMo: 1000,
-        });
-        //контекст браузера
-        context = await browser.newContext();
-        page = await context.newPage();
+        // await page.fill('#username', 'demo');
+        // await page.click('#password');
+        // await page.fill('#password', 'demo');
+        // await page.click('.is-primary');
+        // // await page.waitForNavigation({waitUntil:'networkidle'});
+        // const profileName = ('.user > .dropdown > .dropdown-trigger > .button > .username');
+        // await page.waitForSelector(profileName);
+        // const profileNameText = await page.textContent(profileName);
+        // expect('demo').to.have.string(profileNameText);
+        // // await page.click(profileName);
 
-        await page.goto('https://try.vikunja.io/login');
-
-        await page.close();
-        await browser.close();
 
     })
 })
